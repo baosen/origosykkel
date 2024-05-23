@@ -6,7 +6,7 @@
       <a href="#" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1"><%= stand['name'] %></h5>
-            <small><%= stand['vehicle_types_available'].select { |vehicle| vehicle['vehicle_type_id'] == 'bike' }[0]['count'] %></small>
+            <small><%= stand['num_bikes_available'] %></small>
         </div>
         <p class="mb-1"><%= stand['address'] %></p>
         <small>Kapasitet: <%= stand['capacity'] %></small>
