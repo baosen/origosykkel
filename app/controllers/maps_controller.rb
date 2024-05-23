@@ -1,58 +1,58 @@
+require 'json'
+require 'http'
+
 class MapsController < ApplicationController
     # Tell which method to call before the action method.
-    before_action :setup, only: [:show, :stations, :status]
+    before_action :setup, only: [:show, :stands]
 
     def show
-        require 'json'
-
-        @endpoints = JSON.parse(get('https://gbfs.urbansharing.com/oslobysykkel.no/gbfs.json'))['data']['nb']['feeds']
-        @endpoints.each do |endpoint|
-            case endpoint['name']
-            when "system_information"
-                @system_information_endpoinbt = endpoint['url']
-            when "vehicle_types"
-                @vehicle_types_endpoint = endpoint['url']
-            when "system_pricing_plans"
-                @system_pricing_plans_endpoint = endpoint['url']
-            when "station_information"
-                @station_information_endpoint = endpoint['url']
-            when "station_status"
-                @station_status_endpoint = endpoint['url']
-            end
-        end
-
-        @stations = JSON.parse(get(@station_information_endpoint))['data']['stations']
-        @station_status = JSON.parse(HTTP.get(@station_status_endpoint))['data']['stations']
+        @stands = all
     end
 
     # Returns a list of stations.
-    def stations
-        render json: JSON.parse(get(@station_information_endpoint))['data']['stations']
-    end
-
-    # Returns a list of station status.
-    def status
-        render json: JSON.parse(get(@station_status_endpoint))['data']['stations']
+    def stands
+        render json: all
     end
 
     private
         # Called before the actions to setup the endpoints to retrieve data from oslobysykkel.no.
         def setup
-            require 'http'
-
+            # Get oslobysykkel.no's endpoints from its auto-discovery endpoint.
             @endpoints = JSON.parse(get('https://gbfs.urbansharing.com/oslobysykkel.no/gbfs.json'))['data']['nb']['feeds']
             @endpoints.each do |endpoint|
                 case endpoint['name']
                 when "system_information"
-                    @system_information_endpoinbt = endpoint['url']
+                    @system_information_endpoint = endpoint['url'] # not used by this app.
                 when "vehicle_types"
-                    @vehicle_types_endpoint = endpoint['url']
+                    @vehicle_types_endpoint = endpoint['url'] # not used by this app.
                 when "system_pricing_plans"
-                    @system_pricing_plans_endpoint = endpoint['url']
+                    @system_pricing_plans_endpoint = endpoint['url'] # not used by this app.
                 when "station_information"
                     @station_information_endpoint = endpoint['url']
                 when "station_status"
                     @station_status_endpoint = endpoint['url']
+                end
+            end
+        end
+
+        # Returns a list of Oslo Bysykkel stations from its REST API.
+        def get_stations
+            JSON.parse(get(@station_information_endpoint))['data']['stations']
+        end
+
+        # Returns a list of statuses of stations from its REST API.
+        def get_statuses
+            JSON.parse(get(@station_status_endpoint))['data']['stations']
+        end
+
+        # Return all.
+        def all
+            index = get_stations.group_by { |station| station['station_id'] }
+            return get_statuses.flat_map do |status|
+                if index[status['station_id']]
+                index[status['station_id']].map { |station| status.merge(station) }
+                else
+                []
                 end
             end
         end

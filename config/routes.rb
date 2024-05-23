@@ -10,6 +10,5 @@ Rails.application.routes.draw do
 
   resource :maps
 
-  get "/stations", to: "maps#stations"
-  get "/status", to: "maps#status"
+  get "/stands", to: "maps#stands"
 end

@@ -1,20 +1,9 @@
-<h1>Endepunkter</h1>
-<div>
-    <pre><%= JSON.pretty_generate(@endpoints) %></pre>
-</div>
-
-<h1>Stasjoner</h1>
-<div>
-    <pre><%= JSON.pretty_generate(@stations) %></pre>
-</div>
-
-<% @stations.each do |station|%>
-    <li><%= station['name'] %></li>
-<% end %>
-
-<h1>Status</h1>
-<div>
-    <% @station_status.each do |station_status|%>
-        <pre><%= JSON.pretty_generate(station_status) %></pre>
-    <% end %>
+<div class="d-flex flex-row">
+    <div class="p-2">
+        <h1>Bysykkelstativer</h1>
+        <pre><%= JSON.pretty_generate(@stands) %></pre>
+    </div>
+    <div class="p-2">
+        test
+    </div>
 </div>
