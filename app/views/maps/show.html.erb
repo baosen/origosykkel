@@ -1,9 +1,18 @@
 <div class="d-flex flex-row">
-    <div class="p-2">
-        <h1>Bysykkelstativer</h1>
-        <pre><%= JSON.pretty_generate(@stands) %></pre>
+  <div>
+    <h1 class="p-2">Bysykkelstativer</h1>
+    <div class="list-group list-group-flush">
+    <% @stands.sort_by{ |stand| stand['name'] }.each do |stand| %>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><%= stand['name'] %></h5>
+            <small><%= stand['vehicle_types_available'].select { |vehicle| vehicle['vehicle_type_id'] == 'bike' }[0]['count'] %></small>
+        </div>
+        <p class="mb-1"><%= stand['address'] %></p>
+        <small>Kapasitet: <%= stand['capacity'] %></small>
+      </a>
+    <% end %>
     </div>
-    <div class="p-2">
-        test
-    </div>
+  </div>
+  <div>Cool map</div>
 </div>

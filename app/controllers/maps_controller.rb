@@ -45,7 +45,7 @@ class MapsController < ApplicationController
             JSON.parse(get(@station_status_endpoint))['data']['stations']
         end
 
-        # Return all.
+        # Return all stands.
         def all
             index = get_stations.group_by { |station| station['station_id'] }
             return get_statuses.flat_map do |status|
