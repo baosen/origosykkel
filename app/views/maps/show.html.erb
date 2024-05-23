@@ -1,7 +1,7 @@
 <div class="d-flex flex-row">
   <div>
     <h1 class="p-2">Bysykkelstativer</h1>
-    <div class="list-group list-group-flush">
+    <div class="list-group list-group-flush bike-list">
     <% @stands.sort_by{ |stand| stand['name'] }.each do |stand| %>
       <a href="#" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">

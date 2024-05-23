@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.bike-list {
+    overflow-y: scroll;
+    height: 100vh;
+}
