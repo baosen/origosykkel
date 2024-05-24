@@ -8,7 +8,7 @@ export default class extends Controller {
 
   connect() {
     var map = L.map('map').setView(
-      [59.92472143605738, 10.73411569091055], // a center-coordinate that is able to display all markers.
+      [59.92472143605738, 10.73411569091055], // a center-coordinate that is able to display all markers in Oslo.
       14
     );
 
@@ -18,7 +18,17 @@ export default class extends Controller {
     }).addTo(map);
 
     this.coordinatesValue.forEach((coordinate) => {
-      L.marker(coordinate).addTo(map);
+      var marker = L.marker(coordinate.slice(1, 3));
+      marker.id = coordinate[0]; // station id.
+      marker.addTo(map).on('mouseover', (e) => {
+        var stationAnchor = document.getElementById(e.target.id);
+        stationAnchor.classList.add('active');
+        stationAnchor.scrollIntoView();
+      });
+      marker.addTo(map).on('mouseout', (e) => {
+        var stationAnchor = document.getElementById(e.target.id);
+        stationAnchor.classList.remove('active');
+      });
     })
   }
 }
