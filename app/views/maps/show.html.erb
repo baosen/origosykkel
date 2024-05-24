@@ -14,7 +14,7 @@
             </span>
           </div>
           <p class="mb-1"><%= stand['address'] %></p>
-          <small><i><%= stand['capacity'] %> plasser</i></small>
+          <small><i><%= stand['capacity'] - stand['num_bikes_available'] %> ledige låser. <%= stand['capacity'] %> antall plasser.</i></small>
         </a>
       <% end %>
     </div>
