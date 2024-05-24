@@ -7,7 +7,7 @@ export default class extends Controller {
   }
 
   connect() {
-    var map = L.map('map').setView(
+    this.map = L.map('map').setView(
       [59.92472143605738, 10.73411569091055], // a center-coordinate that is able to display all markers in Oslo.
       14
     );
@@ -15,20 +15,45 @@ export default class extends Controller {
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+    }).addTo(this.map);
 
     this.coordinatesValue.forEach((coordinate) => {
       var marker = L.marker(coordinate.slice(1, 3));
       marker.id = coordinate[0]; // station id.
-      marker.addTo(map).on('mouseover', (e) => {
+      marker.addTo(this.map).on('mouseover', (e) => {
+        if (this.previous) {
+          this.previous.classList.remove('active');
+        }
         var stationAnchor = document.getElementById(e.target.id);
         stationAnchor.classList.add('active');
         stationAnchor.scrollIntoView();
+        this.previous = stationAnchor;
       });
-      marker.addTo(map).on('mouseout', (e) => {
+      marker.addTo(this.map).on('mouseout', (e) => {
+        if (this.previous) {
+          this.previous.classList.remove('active');
+        }
         var stationAnchor = document.getElementById(e.target.id);
         stationAnchor.classList.remove('active');
+        this.previous = null;
       });
     })
+  }
+
+  view(event) {
+    if (this.previous) {
+      this.previous.classList.remove('active');
+    }
+    if (event.target.nodeName != "A") {
+      var element = event.target.closest('a');
+      element.classList.add('active');
+      element.scrollIntoView();
+      this.previous = element;
+    } else {
+      event.target.classList.add('active');
+      event.target.scrollIntoView();
+      this.previous = event.target;
+    }
+    this.map.setView(event.params.coordinate, 20);
   }
 }

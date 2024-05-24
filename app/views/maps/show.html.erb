@@ -1,9 +1,9 @@
-<div class="d-flex flex-row">
+<div class="d-flex flex-row" data-controller="map" data-map-coordinates-value="<%= @stands.map { |stand| [stand['station_id'], stand['lat'], stand['lon']] } %>">
   <div>
     <h1 class="p-2">Bysykkelstativer</h1>
     <div class="list-group list-group-flush bike-list">
       <% @stands.sort_by{ |stand| stand['name'] }.each do |stand| %>
-        <a id="<%= stand['station_id'] %>" href="#" class="list-group-item list-group-item-action">
+        <a id="<%= stand['station_id'] %>" class="list-group-item list-group-item-action" data-action="map#view:prevent" data-map-coordinate-param="<%= [stand['lat'], stand['lon']] %>">
           <div class="d-flex w-100 justify-content-between align-items-start">
             <h5 class="mb-1"><%= stand['name'] %></h5>
             <span class="badge text-bg-secondary rounded-pill">
@@ -20,6 +20,6 @@
     </div>
   </div>
   <div class="map">
-    <div id="map" data-controller="map" data-map-coordinates-value="<%= @stands.map { |stand| [stand['station_id'], stand['lat'], stand['lon']] } %>"></div>
+    <div id="map"></div>
   </div>
 </div>
