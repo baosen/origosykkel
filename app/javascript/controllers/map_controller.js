@@ -30,12 +30,26 @@ export default class extends Controller {
         this.previous = stationAnchor;
       });
       marker.addTo(this.map).on('mouseout', (e) => {
+        if (this.markerClicked) {
+          this.markerClicked = false;
+          return;
+        }
         if (this.previous) {
           this.previous.classList.remove('active');
         }
         var stationAnchor = document.getElementById(e.target.id);
         stationAnchor.classList.remove('active');
         this.previous = null;
+      });
+      marker.addTo(this.map).on('click', (e) => {
+        if (this.previous) {
+          this.previous.classList.remove('active');
+        }
+        this.map.setView(e.target._latlng, 20);
+        var stationAnchor = document.getElementById(e.target.id);
+        stationAnchor.classList.add('active');
+        this.previous = stationAnchor;
+        this.markerClicked = true;
       });
     })
   }
