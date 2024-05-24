@@ -61,11 +61,9 @@ export default class extends Controller {
     if (event.target.nodeName != "A") {
       var element = event.target.closest('a');
       element.classList.add('active');
-      element.scrollIntoView();
       this.previous = element;
     } else {
       event.target.classList.add('active');
-      event.target.scrollIntoView();
       this.previous = event.target;
     }
     this.map.setView(event.params.coordinate, 20);
