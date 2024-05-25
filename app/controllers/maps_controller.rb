@@ -6,12 +6,12 @@ class MapsController < ApplicationController
     before_action :setup, only: [:show, :stands]
 
     def show
-        @stands = all
+        @stands = all_stands
     end
 
     # Returns a list of stations.
     def stands
-        render json: all
+        render json: all_stands
     end
 
     private
@@ -46,13 +46,13 @@ class MapsController < ApplicationController
         end
 
         # Return all stands.
-        def all
+        def all_stands
             index = get_stations.group_by { |station| station['station_id'] }
             return get_statuses.flat_map do |status|
                 if index[status['station_id']]
-                index[status['station_id']].map { |station| status.merge(station) }
+                    index[status['station_id']].map { |station| status.merge(station) }
                 else
-                []
+                    []
                 end
             end
         end
