@@ -6,7 +6,7 @@ This web application displays all bicycle stands and its available bicycles that
 
 ## How to run
 
-First, you need to install Ruby on your computer. I recommend you to use the tool [`rbenv`](https://github.com/rbenv/rbenv) for that.
+First, you need to install Ruby on your computer. I recommend you to use the tool [`rbenv`](https://github.com/rbenv/rbenv) for that. Follow its installation instruction until you're able to run the command `ruby`.
 
 Then execute
 
