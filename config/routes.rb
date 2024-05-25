@@ -8,7 +8,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "maps#show"
 
-  resource :maps
-
   get "/stands", to: "maps#stands"
 end
