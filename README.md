@@ -1,26 +1,49 @@
 # Origosykkel
 
-by Bao Chi Tran Nguyen.
+This web application displays all bicycle stands and its available bicycles that can be rented from Oslo Bysykkel.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to run
 
-Things you may want to cover:
+Execute
 
-* Ruby version
+```
+./bin/rails server
+```
 
-* System dependencies
+to run the development server. Then visit
 
-* Configuration
+```
+http://127.0.0.1:3000
+```
 
-* Database creation
+to browser to its graphical user interface, and
 
-* Database initialization
+```
+http://127.0.0.1:3000/stands
+```
 
-* How to run the test suite
+to return a list of bicycle stands and information about them.
 
-* Services (job queues, cache servers, search engines, etc.)
+## How to test
 
-* Deployment instructions
+Execute
 
-* ...
+```
+./bin/rails test
+```
+
+to run all test, except the system tests.
+
+## How to build and run a Docker container image
+
+Execute
+
+```
+./bin/docker_run
+```
+
+which will build and run this app in Docker.
+
+## Author
+
+Bao Chi Tran Nguyen.
