@@ -2,6 +2,8 @@
 
 This web application displays all bicycle stands and its available bicycles that can be rented from Oslo Bysykkel.
 
+![App](./app.png)
+
 ## How to run
 
 First, you need to install Ruby on your computer. I recommend you to use the tool [`rbenv`](https://github.com/rbenv/rbenv) for that.
