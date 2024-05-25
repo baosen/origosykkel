@@ -4,7 +4,17 @@ This web application displays all bicycle stands and its available bicycles that
 
 ## How to run
 
-Execute
+First, you need to install Ruby on your computer. I recommend you to use the tool [`rbenv`](https://github.com/rbenv/rbenv) for that.
+
+Then execute
+
+```
+./bin/setup
+```
+
+to setup the development environment.
+
+Then execute
 
 ```
 ./bin/rails server
