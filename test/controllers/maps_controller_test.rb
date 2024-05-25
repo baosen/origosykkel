@@ -2,7 +2,7 @@ require "test_helper"
 require "json"
 
 class MapsControllerTest < ActionDispatch::IntegrationTest
-  test "the truth" do
+  test "stands rest api" do
     get "/stands"
 
     assert_response :success
@@ -15,5 +15,11 @@ class MapsControllerTest < ActionDispatch::IntegrationTest
     assert_instance_of Integer, first_stand['num_bikes_available']
     assert_instance_of Float, first_stand['lat']
     assert_instance_of Float, first_stand['lon']
+  end
+
+  test "can see root page" do
+    get root_url
+
+    assert_select "h1", "Bysykkelstativer"
   end
 end
