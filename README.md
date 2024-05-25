@@ -41,10 +41,10 @@ to return a list of bicycle stands and information about them.
 Execute
 
 ```
-./bin/rails test
+./bin/rails test:all
 ```
 
-to run all test, except the system tests.
+to run all tests.
 
 ## How to build and run a Docker container image
 
